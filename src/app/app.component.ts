@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	template: `
+		<h1>Change Detection</h1>
+		<app-a></app-a>
+	`,
+	styleUrls: ['./app.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'change-detection';
+	title = 'change-detection';
+
+	ngOnInit() {
+
+	}
 }
