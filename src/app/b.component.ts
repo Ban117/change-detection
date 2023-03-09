@@ -64,10 +64,7 @@ export class BComponent implements OnInit, OnChanges {
 	// (ie. it's not marked as dirty), ngDoCheck is not triggered for them.
 	ngDoCheck() {
 		console.log('%c>>>> Component B ngDoCheck', 'color: SkyBlue');
-		this._ngZone.runOutsideAngular(() =>
-			flashEl(this.el.nativeElement, 'SkyBlue')
-		);
-
+		flashEl(this.el.nativeElement, 'SkyBlue', this._ngZone);
 		// this.cdr.markForCheck();
 	}
 

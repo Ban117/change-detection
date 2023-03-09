@@ -13,6 +13,7 @@ should check parent OnPush components in update mode when child events occur
 should check parent OnPush components when child directive on a template emits event
 ```
 * Can probably write small examples for the above and also for
+
 * _Keep in mind that ngDoCheck is triggered only for top-most child component. If the component has children, and Angular doesn't check this component, ngDoCheck is not triggered for them._
 
 <br/>

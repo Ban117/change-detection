@@ -48,9 +48,7 @@ export class CComponent implements OnInit, OnChanges {
 
 	ngDoCheck() {
 		console.log('%c>>>> Component c ngDoCheck', 'color: Plum');
-		this._ngZone.runOutsideAngular(() =>
-			flashEl(this.el.nativeElement, 'Plum')
-		);
+		flashEl(this.el.nativeElement, 'Plum', this._ngZone);
 	}
 
 	buttonClicked() {

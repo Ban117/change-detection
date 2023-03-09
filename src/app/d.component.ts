@@ -47,9 +47,7 @@ export class DComponent implements OnInit, OnChanges {
 
 	ngDoCheck() {
 		console.log('%c>>>> Component D ngDoCheck', 'color: HotPink');
-		this._ngZone.runOutsideAngular(() =>
-			flashEl(this.el.nativeElement, 'HotPink')
-		);
+		flashEl(this.el.nativeElement, 'HotPink', this._ngZone);
 	}
 
 	buttonClicked() {
