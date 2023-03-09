@@ -1,51 +1,75 @@
-import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-
-const NAME_KEBAB = "app-a";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	DoCheck,
+	ElementRef,
+	OnChanges,
+	OnInit,
+	SimpleChanges,
+	ViewEncapsulation,
+} from '@angular/core';
+import { flashEl } from './utils';
 
 @Component({
-	selector: NAME_KEBAB,
-	host: { class: NAME_KEBAB },
+	selector: 'app-a',
+	host: { class: 'app-a' },
 	template: `
-		<p>
-			I am Component A
-		</p>
-		<app-b></app-b>
+		<p>app-a</p>
+		<p>binding: {{ binding }}</p>
+		<button (click)="buttonClicked()">Button</button>
+		<button (click)="otherButtonClicked()">Button_2</button>
+		<app-b [mutableObject]="mutableObject"></app-b>
 	`,
 	styles: [
 		`
-		.app-a {
-			display: block;
-			background: yellow;
-		}
-		`
+			.app-a {
+				display: block;
+				background: LavenderBlush;
+				padding: 20px;
+			}
+		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class AComponent implements OnInit, OnChanges, DoCheck {
+export class AComponent implements OnInit, OnChanges {
+	mutableObject: any = {
+		name: 'startWithThis',
+	};
 
-	constructor() {
-	}
+	binding = '';
+	constructor(private el: ElementRef) {}
 
 	ngOnInit() {
-		setTimeout(() => {
-			console.warn(">>>> timeout");
-		}, 2000);
+		// setTimeout(() => {
+		// 	this.binding = 'bound';
+		// }, 1000);
 	}
 
 	// Respond when Angular sets or resets data-bound input properties.
 	// If your component has no inputs or you use it without providing any inputs,
 	// the framework will not call ngOnChanges()
 	ngOnChanges(changes: SimpleChanges) {
-		console.warn(">>>> Component A OnChanges", changes);
+		console.log(
+			'%c>>>> Component A OnChanges',
+			'color: LavenderBlush',
+			changes
+		);
 	}
 
-	// Called:
-	// 1. immediately after ngOnChanges()
-	// 2. on every change detection run
-	// 3. and immediately after ngOnInit() on the first run.
 	ngDoCheck() {
-		console.warn(">>>> Component A DoCheck");
+		console.log('%c>>>> Component A ngDoCheck', 'color: LavenderBlush');
 	}
 
+	buttonClicked() {
+		console.log(
+			'%c>>>> buttonClicked',
+			'color: LavenderBlush',
+			this.constructor.name
+		);
+	}
+
+	otherButtonClicked() {
+		this.mutableObject.name = 'Now this';
+	}
 }

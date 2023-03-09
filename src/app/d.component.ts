@@ -1,7 +1,6 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	DoCheck,
 	ElementRef,
 	NgZone,
 	OnChanges,
@@ -12,18 +11,18 @@ import {
 import { flashEl } from './utils';
 
 @Component({
-	selector: 'app-c',
-	host: { class: 'app-c' },
+	selector: 'app-d',
+	host: { class: 'app-d' },
 	template: `
-		<p>app-c</p>
+		<p>app-d</p>
 		<p>binding: {{ binding }}</p>
 		<button (click)="buttonClicked()">Button</button>
 	`,
 	styles: [
 		`
-			.app-c {
+			.app-d {
 				display: block;
-				background: Plum;
+				background: HotPink;
 				padding: 20px;
 			}
 		`,
@@ -31,7 +30,7 @@ import { flashEl } from './utils';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class CComponent implements OnInit, OnChanges {
+export class DComponent implements OnInit, OnChanges {
 	binding = '';
 
 	constructor(private el: ElementRef, private _ngZone: NgZone) {}
@@ -39,24 +38,24 @@ export class CComponent implements OnInit, OnChanges {
 	ngOnInit() {
 		// setTimeout(() => {
 		// 	this.binding = 'bound';
-		// }, 2000);
+		// }, 2500);
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log('%c>>>> Component C OnChanges', 'color: Plum', changes);
+		console.log('%c>>>> Component D OnChanges', 'color: HotPink', changes);
 	}
 
 	ngDoCheck() {
-		console.log('%c>>>> Component c ngDoCheck', 'color: Plum');
+		console.log('%c>>>> Component D ngDoCheck', 'color: HotPink');
 		this._ngZone.runOutsideAngular(() =>
-			flashEl(this.el.nativeElement, 'Plum')
+			flashEl(this.el.nativeElement, 'HotPink')
 		);
 	}
 
 	buttonClicked() {
 		console.log(
 			'%c>>>> buttonClicked',
-			'color: Plum',
+			'color: HotPink',
 			this.constructor.name
 		);
 	}

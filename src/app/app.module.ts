@@ -6,6 +6,7 @@ import { CComponent } from './c.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DComponent } from './d.component';
 
 @NgModule({
 	declarations: [
@@ -13,12 +14,10 @@ import { AppComponent } from './app.component';
 		AComponent,
 		BComponent,
 		CComponent,
+		DComponent,
 	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule
-	],
+	imports: [BrowserModule, AppRoutingModule],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
