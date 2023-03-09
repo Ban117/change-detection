@@ -1,5 +1,3 @@
-https://indepth.dev/posts/1010/the-difference-between-ngdocheck-and-asyncpipe-in-onpush-components
-
 https://courses.indepth.dev/angular/optimization-techniques/on-push-strategy
 
 ```text
