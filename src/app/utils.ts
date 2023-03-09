@@ -9,6 +9,6 @@ export function flashEl(
 		el.style.background = 'blue';
 		setTimeout(() => {
 			el.style.background = originalColor;
-		}, 50);
+		}, 250);
 	});
 }

@@ -3,6 +3,7 @@ import {
 	Component,
 	DoCheck,
 	ElementRef,
+	NgZone,
 	OnChanges,
 	OnInit,
 	SimpleChanges,
@@ -38,7 +39,7 @@ export class AComponent implements OnInit, OnChanges {
 	};
 
 	binding = '';
-	constructor(private el: ElementRef) {}
+	constructor(private el: ElementRef, private _ngZone: NgZone) {}
 
 	ngOnInit() {
 		// setTimeout(() => {
@@ -46,7 +47,7 @@ export class AComponent implements OnInit, OnChanges {
 		// }, 1000);
 	}
 
-	// Respond when Angular sets or resets data-bound input properties.
+	// Respond when Angular sets or resets data-bound `@Input` properties.
 	// If your component has no inputs or you use it without providing any inputs,
 	// the framework will not call ngOnChanges()
 	ngOnChanges(changes: SimpleChanges) {
@@ -59,6 +60,7 @@ export class AComponent implements OnInit, OnChanges {
 
 	ngDoCheck() {
 		console.log('%c>>>> Component A ngDoCheck', 'color: LavenderBlush');
+		flashEl(this.el.nativeElement, 'LavenderBlush', this._ngZone);
 	}
 
 	buttonClicked() {
