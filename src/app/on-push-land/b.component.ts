@@ -14,7 +14,7 @@ import {
 	ViewEncapsulation,
 	ViewRef,
 } from '@angular/core';
-import { flashEl } from './utils';
+import { flashEl } from '../utils/utils';
 
 @Component({
 	selector: 'app-b',
@@ -23,7 +23,7 @@ import { flashEl } from './utils';
 		<p>app-b</p>
 		<p>binding: {{ binding }}</p>
 		<p>@Input mutable binding: {{ mutableObject.name }}</p>
-		<button (click)="buttonClicked()">Button</button>
+		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
 		<app-c></app-c>
 	`,
 	styles: [
@@ -68,7 +68,7 @@ export class BComponent implements OnInit, OnChanges {
 		// this.cdr.markForCheck();
 	}
 
-	buttonClicked() {
+	firePointlessEvent() {
 		console.log(
 			'%c>>>> buttonClicked',
 			'color: SkyBlue',

@@ -9,7 +9,7 @@ import {
 	SimpleChanges,
 	ViewEncapsulation,
 } from '@angular/core';
-import { flashEl } from './utils';
+import { flashEl } from '../utils/utils';
 
 @Component({
 	selector: 'app-c',
@@ -17,7 +17,8 @@ import { flashEl } from './utils';
 	template: `
 		<p>app-c</p>
 		<p>binding: {{ binding }}</p>
-		<button (click)="buttonClicked()">Button</button>
+		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
+		<app-d></app-d>
 	`,
 	styles: [
 		`
@@ -51,7 +52,7 @@ export class CComponent implements OnInit, OnChanges {
 		flashEl(this.el.nativeElement, 'Plum', this._ngZone);
 	}
 
-	buttonClicked() {
+	firePointlessEvent() {
 		console.log(
 			'%c>>>> buttonClicked',
 			'color: Plum',

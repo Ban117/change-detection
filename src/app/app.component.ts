@@ -1,20 +1,16 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ElementRef,
-	NgZone,
 	ViewEncapsulation,
 } from '@angular/core';
-import { flashEl } from './utils';
 
 @Component({
 	selector: 'app-root',
 	host: { class: 'app-root' },
-	template: `
-		<h1>Change Detection - app-root</h1>
-		<app-a></app-a>
-		<app-d></app-d>
-	`,
+	template: ` <a class="link" routerLink="">Home</a>
+		<a class="link" routerLink="on-push">To on-push land</a>
+		<a class="link" routerLink="check-once">To check once land</a>
+		<router-outlet></router-outlet>`,
 	styles: [
 		`
 			.app-root {
@@ -23,23 +19,13 @@ import { flashEl } from './utils';
 				padding: 20px;
 				background-color: LightSalmon;
 			}
+
+			.link {
+				padding: 20px;
+			}
 		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-	constructor(private el: ElementRef, private _ngZone: NgZone) {}
-
-	// It's executed before Angular will run change detection for
-	// the component but during the check of the parent component.
-
-	// Called:
-	// 1. immediately after ngOnChanges()
-	// 2. on every change detection run
-	// 3. and immediately after ngOnInit() on the first run.
-	ngDoCheck() {
-		console.log('%c>>>> root -> cd ran', 'color: LightSalmon');
-		flashEl(this.el.nativeElement, 'LightSalmon', this._ngZone);
-	}
-}
+export class AppComponent {}
