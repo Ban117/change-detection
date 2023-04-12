@@ -15,7 +15,7 @@ import { flashEl } from '../utils/utils';
 	selector: 'app-on-push-container',
 	host: { class: 'app-on-push-container' },
 	template: `
-		<h1>On Push Root</h1>
+		<h1>On Push Root {{binding}}</h1>
 		<app-a></app-a>
 	`,
 	styles: [
@@ -31,6 +31,13 @@ import { flashEl } from '../utils/utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class OnPushContainer {
+
+	get binding(): string {
+		console.log('%c>>>> OnPushContainer -> cd ran/getting binding', 'color: SteelBlue');
+		return this._binding;
+	}
+
+	private _binding = "some binding";
 	constructor(private el: ElementRef, private _ngZone: NgZone) {}
 
 	// It's executed before Angular will run change detection for

@@ -21,6 +21,7 @@ should check parent OnPush components when child directive on a template emits e
 * We can put a breakpoint on `markViewDirty(` to see the components that get marked as dirty 
 
 * We can also monkey patch `..node_modules/@angular/core/fesm2020/core.mjs` with a log
+([core.mjs](node_modules/@angular/core/fesm2020/core.mjs))
 
 * Even IF all our components are `OnPush`, eimitting and handling an event in a nested component will mark as dirty all of its ancesstors, as can be seen below. The buttonClick occured in `DComponent`
 
