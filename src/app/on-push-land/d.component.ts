@@ -19,10 +19,13 @@ import { flashEl } from '../utils/utils';
 		<p>app-d</p>
 		<p>binding: {{ binding }}</p>
 		<button (click.zoneless)="firePointlessEvent()">
-			Fire Pointless Event (uses zoneless directive)
+			Fire Pointless Event (uses click zoneless directive)
 		</button>
 		<button #btn>
 			Fire Pointless Event (uses component running outside zone)
+		</button>
+		<button [zoneless]="firePointlessEvent" zonelessEventName="dblclick">
+			Fire Pointless Event (uses zonless directive)
 		</button>
 	`,
 	styles: [

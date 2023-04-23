@@ -42,3 +42,39 @@ export class ClickZonelessDirective {
 		);
 	}
 }
+
+type WebEvent = keyof HTMLElementEventMap;
+
+/**
+ * Doesn't cause marking as dirty
+ */
+@Directive({
+	selector: '[zoneless]',
+})
+export class ZonelessDirective {
+	@Input('zoneless') zoneless: any;
+
+	@Input('zonelessEventName') zonelessEventName: WebEvent | undefined;
+
+	constructor(
+		private readonly zone: NgZone,
+		private btnEl: ElementRef,
+		private renderer: Renderer2
+	) {}
+
+	ngOnInit() {
+		this.zone.runOutsideAngular(() => {
+			this.setupClickListener();
+		});
+	}
+
+	private setupClickListener() {
+		this.renderer.listen(
+			this.btnEl.nativeElement,
+			this.zonelessEventName || 'click',
+			() => {
+				this.zoneless();
+			}
+		);
+	}
+}
