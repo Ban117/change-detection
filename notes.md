@@ -23,6 +23,14 @@ should check parent OnPush components when child directive on a template emits e
 * We can also monkey patch `..node_modules/@angular/core/fesm2020/core.mjs` with a log
 ([core.mjs](node_modules/@angular/core/fesm2020/core.mjs))
 
+* We need to delete the `.angular` folder for changes to be applied
+
+* `detectChangesInternal` seems to run when CD runs
+
 * Even IF all our components are `OnPush`, eimitting and handling an event in a nested component will mark as dirty all of its ancesstors, as can be seen below. The buttonClick occured in `DComponent`
 
 ![Signals will allow for better CD](img/why_signals_will_be_nice.png)
+
+# Running outside zone
+
+* Interestingly, using the `ClickZonelessDirective` still marks views as dirty, whereas the listener set up within the component does not

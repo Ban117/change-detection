@@ -5,7 +5,9 @@ import {
 	NgZone,
 	OnChanges,
 	OnInit,
+	Renderer2,
 	SimpleChanges,
+	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
@@ -16,7 +18,12 @@ import { flashEl } from '../utils/utils';
 	template: `
 		<p>app-d</p>
 		<p>binding: {{ binding }}</p>
-		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
+		<button (click.zoneless)="firePointlessEvent()">
+			Fire Pointless Event (uses zoneless directive)
+		</button>
+		<button #btn>
+			Fire Pointless Event (uses component running outside zone)
+		</button>
 	`,
 	styles: [
 		`
@@ -31,20 +38,25 @@ import { flashEl } from '../utils/utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class DComponent implements OnInit, OnChanges {
+	@ViewChild('btn') btnEl!: ElementRef<HTMLButtonElement>;
+
 	binding = '';
 
-	constructor(private el: ElementRef, private _ngZone: NgZone) {}
+	constructor(
+		private el: ElementRef,
+		private _ngZone: NgZone,
+		private renderer: Renderer2
+	) {}
 
 	ngOnInit() {
 		// setTimeout(() => {
-		// 	this.binding = 'bound';
-		// }, 2500);
-
-		setTimeout(() => {
-			console.log('pointless');
-		}, 5000);
+		// 	console.log('pointless');
+		// }, 5000);
 	}
 
+	ngAfterViewInit() {
+		this._ngZone.runOutsideAngular(() => this.setupClickListener());
+	}
 	ngOnChanges(changes: SimpleChanges) {
 		console.log('%c>>>> Component D OnChanges', 'color: HotPink', changes);
 	}
@@ -60,5 +72,11 @@ export class DComponent implements OnInit, OnChanges {
 			'color: HotPink',
 			this.constructor.name
 		);
+	}
+
+	private setupClickListener() {
+		this.renderer.listen(this.btnEl.nativeElement, 'click', () => {
+			this.firePointlessEvent();
+		});
 	}
 }

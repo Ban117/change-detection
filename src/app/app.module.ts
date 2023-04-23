@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { DComponent } from './on-push-land/d.component';
 import { RouterModule } from '@angular/router';
 import { OnPushContainer } from './on-push-land/on-push-container';
+import { ClickZonelessDirective } from './on-push-land/directives';
 
 @NgModule({
 	imports: [BrowserModule, AppRoutingModule, RouterModule],
@@ -19,6 +20,7 @@ import { OnPushContainer } from './on-push-land/on-push-container';
 		BComponent,
 		CComponent,
 		DComponent,
+		ClickZonelessDirective,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
