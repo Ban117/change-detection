@@ -15,7 +15,7 @@ import { flashEl } from '../utils/utils';
 	selector: 'app-on-push-container',
 	host: { class: 'app-on-push-container' },
 	template: `
-		<h1>On Push Root {{binding}}</h1>
+		<h1>On Push Root</h1>
 		<app-a></app-a>
 	`,
 	styles: [
@@ -27,17 +27,10 @@ import { flashEl } from '../utils/utils';
 			}
 		`,
 	],
-	// changeDetection: ChangeDetectionStrategy.OnPush,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class OnPushContainer {
-
-	get binding(): string {
-		console.log('%c>>>> OnPushContainer -> cd ran/getting binding', 'color: SteelBlue');
-		return this._binding;
-	}
-
-	private _binding = "some binding";
 	constructor(private el: ElementRef, private _ngZone: NgZone) {}
 
 	// It's executed before Angular will run change detection for
@@ -51,7 +44,6 @@ export class OnPushContainer {
 	// If the component has children, and Angular doesn't check this component
 	// (ie. it's not marked as dirty), ngDoCheck is not triggered for them.
 	ngDoCheck() {
-		console.log('%c>>>> OnPushContainer -> cd ran', 'color: SteelBlue');
 		flashEl(this.el.nativeElement, 'SteelBlue', this._ngZone);
 	}
 }

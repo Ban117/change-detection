@@ -52,9 +52,9 @@ type WebEvent = keyof HTMLElementEventMap;
 	selector: '[zoneless]',
 })
 export class ZonelessDirective {
-	@Input('zoneless') zoneless: any;
+	@Input('zoneless') zoneless!: Function;
 
-	@Input('zonelessEventName') zonelessEventName: WebEvent | undefined;
+	@Input('zonelessEventName') zonelessEventName: WebEvent = 'click';
 
 	constructor(
 		private readonly zone: NgZone,
@@ -71,7 +71,7 @@ export class ZonelessDirective {
 	private setupClickListener() {
 		this.renderer.listen(
 			this.btnEl.nativeElement,
-			this.zonelessEventName || 'click',
+			this.zonelessEventName,
 			() => {
 				this.zoneless();
 			}

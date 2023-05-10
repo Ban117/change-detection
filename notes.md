@@ -27,6 +27,9 @@ should check parent OnPush components when child directive on a template emits e
 
 * `detectChangesInternal` seems to run when CD runs
 
+* `markDirtyIfOnPush` is called when in a parent an input binding for a child is changed. This marks the child as dirty to continue the CD run downwards.
+![markDirtyIfOnPush](img/Screenshot%202023-05-10%20at%2018.59.34.png)
+
 * Even IF all our components are `OnPush`, eimitting and handling an event in a nested component will mark as dirty all of its ancesstors, as can be seen below. The buttonClick occured in `DComponent`
 
 ![Signals will allow for better CD](img/why_signals_will_be_nice.png)

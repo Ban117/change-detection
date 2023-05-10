@@ -1,7 +1,7 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
-	DoCheck,
 	ElementRef,
 	NgZone,
 	OnChanges,
@@ -39,12 +39,17 @@ export class AComponent implements OnInit, OnChanges {
 	};
 
 	binding = '';
-	constructor(private el: ElementRef, private _ngZone: NgZone) {}
+	constructor(
+		private el: ElementRef,
+		private _ngZone: NgZone,
+		private cdr: ChangeDetectorRef
+	) {}
 
 	ngOnInit() {
-		// setTimeout(() => {
-		// 	this.binding = 'bound';
-		// }, 1000);
+		setTimeout(() => {
+			this.mutableObject = { name: 'New Name' };
+			this.cdr.markForCheck();
+		}, 5000);
 	}
 
 	// Respond when Angular sets or resets data-bound `@Input` properties.

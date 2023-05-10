@@ -2,17 +2,13 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	DoCheck,
 	ElementRef,
-	Host,
 	Input,
 	NgZone,
 	OnChanges,
 	OnInit,
 	SimpleChanges,
-	ViewContainerRef,
 	ViewEncapsulation,
-	ViewRef,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
