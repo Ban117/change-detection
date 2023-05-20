@@ -13,6 +13,12 @@ import {
 	ClickZonelessDirective,
 	ZonelessDirective,
 } from './on-push-land/directives';
+import {
+	ALifeCycleHooks,
+	BLifeCycleHooks,
+	CLifeCycleHooks,
+} from './life-cycle-hooks-land/components';
+import { LifeCycleHooksContainer } from './life-cycle-hooks-land/life-cycle-hooks-container';
 
 @NgModule({
 	imports: [BrowserModule, AppRoutingModule, RouterModule],
@@ -23,6 +29,10 @@ import {
 		BComponent,
 		CComponent,
 		DComponent,
+		LifeCycleHooksContainer,
+		ALifeCycleHooks,
+		BLifeCycleHooks,
+		CLifeCycleHooks,
 		ClickZonelessDirective,
 		ZonelessDirective,
 	],

@@ -37,3 +37,28 @@ should check parent OnPush components when child directive on a template emits e
 # Running outside zone
 
 * Interestingly, using the `ClickZonelessDirective` still marks views as dirty, whereas the listener set up within the component does not
+
+
+# Life Cycle Hooks
+* Most lifecycle hooks are called on the child component while Angular runs change detection for the current component
+* The behavior is a bit different only for the ngAfterViewChecked hook
+
+```
+Entering view: A
+    B: updateBinding
+    B: ngOnChanges
+    B: ngDoCheck
+        A: updateTemplate
+    B: ngAfterContentChecked
+    Entering view: B
+        С: updateBinding
+        C: ngOnChanges
+        С: ngDoCheck
+            B: updateTemplate
+        С: ngAfterContentChecked
+        Entering view: C
+            С: updateTemplate
+            С: ngAfterViewChecked
+    B: ngAfterViewChecked
+A: ngAfterViewChecked
+```

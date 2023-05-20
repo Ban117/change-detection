@@ -10,6 +10,9 @@ import {
 	template: ` <a class="link" routerLink="">Home</a>
 		<a class="link" routerLink="on-push">To on-push land</a>
 		<a class="link" routerLink="check-once">To check once land</a>
+		<a class="link" routerLink="life-cycle-hooks"
+			>To life cycle hooks land</a
+		>
 		<router-outlet></router-outlet>`,
 	styles: [
 		`
