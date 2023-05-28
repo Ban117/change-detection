@@ -8,6 +8,9 @@ import {
 	Renderer2,
 } from '@angular/core';
 
+/**
+ * Marks as dirty as it outputs a handled event
+ */
 @Directive({
 	selector: '[click.zoneless]',
 })
@@ -46,7 +49,7 @@ export class ClickZonelessDirective {
 type WebEvent = keyof HTMLElementEventMap;
 
 /**
- * Doesn't cause marking as dirty
+ * Doesn't cause marking as dirty because it's not outputting a handled event
  */
 @Directive({
 	selector: '[zoneless]',

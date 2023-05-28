@@ -70,11 +70,7 @@ export class DComponent implements OnInit, OnChanges {
 	}
 
 	firePointlessEvent() {
-		console.log(
-			'%c>>>> buttonClicked',
-			'color: HotPink',
-			this.constructor.name
-		);
+		console.log('%c>>>> buttonClicked', 'color: HotPink', DComponent.name);
 	}
 
 	private setupClickListener() {

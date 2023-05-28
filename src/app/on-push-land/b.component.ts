@@ -65,10 +65,6 @@ export class BComponent implements OnInit, OnChanges {
 	}
 
 	firePointlessEvent() {
-		console.log(
-			'%c>>>> buttonClicked',
-			'color: SkyBlue',
-			this.constructor.name
-		);
+		console.log('%c>>>> buttonClicked', 'color: SkyBlue', BComponent.name);
 	}
 }

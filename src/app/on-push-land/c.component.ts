@@ -52,10 +52,6 @@ export class CComponent implements OnInit, OnChanges {
 	}
 
 	firePointlessEvent() {
-		console.log(
-			'%c>>>> buttonClicked',
-			'color: Plum',
-			this.constructor.name
-		);
+		console.log('%c>>>> buttonClicked', 'color: Plum', CComponent.name);
 	}
 }

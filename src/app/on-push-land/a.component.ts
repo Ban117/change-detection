@@ -72,7 +72,7 @@ export class AComponent implements OnInit, OnChanges {
 		console.log(
 			'%c>>>> buttonClicked',
 			'color: LavenderBlush',
-			this.constructor.name
+			AComponent.name
 		);
 	}
 
