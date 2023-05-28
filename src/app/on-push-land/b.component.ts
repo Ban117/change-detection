@@ -9,6 +9,7 @@ import {
 	OnInit,
 	SimpleChanges,
 	ViewEncapsulation,
+	inject,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
@@ -39,11 +40,9 @@ export class BComponent implements OnInit, OnChanges {
 
 	binding = '';
 
-	constructor(
-		private cdr: ChangeDetectorRef,
-		private el: ElementRef,
-		private _ngZone: NgZone
-	) {}
+	private el = inject(ElementRef);
+	private _ngZone = inject(NgZone);
+	private cdr = inject(ChangeDetectorRef);
 
 	ngOnInit() {
 		// setTimeout(() => {

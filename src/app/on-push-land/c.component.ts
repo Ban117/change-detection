@@ -1,5 +1,6 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	NgZone,
@@ -7,6 +8,7 @@ import {
 	OnInit,
 	SimpleChanges,
 	ViewEncapsulation,
+	inject,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
@@ -34,7 +36,9 @@ import { flashEl } from '../utils/utils';
 export class CComponent implements OnInit, OnChanges {
 	binding = '';
 
-	constructor(private el: ElementRef, private _ngZone: NgZone) {}
+	private el = inject(ElementRef);
+	private _ngZone = inject(NgZone);
+	private cdr = inject(ChangeDetectorRef);
 
 	ngOnInit() {
 		// setTimeout(() => {

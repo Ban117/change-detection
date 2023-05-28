@@ -1,13 +1,10 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	DoCheck,
 	ElementRef,
 	NgZone,
-	OnChanges,
-	OnInit,
-	SimpleChanges,
 	ViewEncapsulation,
+	inject,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
@@ -31,7 +28,8 @@ import { flashEl } from '../utils/utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class OnPushContainer {
-	constructor(private el: ElementRef, private _ngZone: NgZone) {}
+	private el = inject(ElementRef);
+	private _ngZone = inject(NgZone);
 
 	// It's executed before Angular will run change detection for
 	// the component but during the check of the parent component.

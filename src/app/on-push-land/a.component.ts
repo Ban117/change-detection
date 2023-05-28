@@ -8,6 +8,7 @@ import {
 	OnInit,
 	SimpleChanges,
 	ViewEncapsulation,
+	inject,
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
@@ -38,18 +39,17 @@ export class AComponent implements OnInit, OnChanges {
 		name: 'startWithThis',
 	};
 
+	private el = inject(ElementRef);
+	private _ngZone = inject(NgZone);
+	private cdr = inject(ChangeDetectorRef);
+
 	binding = '';
-	constructor(
-		private el: ElementRef,
-		private _ngZone: NgZone,
-		private cdr: ChangeDetectorRef
-	) {}
 
 	ngOnInit() {
-		setTimeout(() => {
-			this.mutableObject = { name: 'New Name' };
-			this.cdr.markForCheck();
-		}, 5000);
+		// setTimeout(() => {
+		// 	this.mutableObject = { name: 'New Name' };
+		// 	this.cdr.markForCheck();
+		// }, 5000);
 	}
 
 	// Respond when Angular sets or resets data-bound `@Input` properties.

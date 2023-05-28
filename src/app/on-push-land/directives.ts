@@ -1,4 +1,5 @@
 import {
+	ChangeDetectorRef,
 	Directive,
 	ElementRef,
 	EventEmitter,
@@ -6,6 +7,7 @@ import {
 	NgZone,
 	Output,
 	Renderer2,
+	inject,
 } from '@angular/core';
 
 /**
@@ -19,11 +21,9 @@ export class ClickZonelessDirective {
 
 	private teardownLogicFn!: Function;
 
-	constructor(
-		private readonly zone: NgZone,
-		private readonly el: ElementRef,
-		private readonly renderer: Renderer2
-	) {}
+	private el = inject(ElementRef);
+	private zone = inject(NgZone);
+	private renderer = inject(Renderer2);
 
 	ngOnInit() {
 		this.zone.runOutsideAngular(() => {
@@ -59,11 +59,9 @@ export class ZonelessDirective {
 
 	@Input('zonelessEventName') zonelessEventName: WebEvent = 'click';
 
-	constructor(
-		private readonly zone: NgZone,
-		private btnEl: ElementRef,
-		private renderer: Renderer2
-	) {}
+	private btnEl = inject(ElementRef);
+	private zone = inject(NgZone);
+	private renderer = inject(Renderer2);
 
 	ngOnInit() {
 		this.zone.runOutsideAngular(() => {
