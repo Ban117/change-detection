@@ -17,7 +17,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class CheckOnceContainer {
 	// todo impl
-	// constructor(private el: ElementRef, private _ngZone: NgZone) {}
+	// constructor(private el: ElementRef, private zone: NgZone) {}
 	// It's executed before Angular will run change detection for
 	// the component but during the check of the parent component.
 	// Called:
@@ -26,6 +26,6 @@ export class CheckOnceContainer {
 	// 3. and immediately after ngOnInit() on the first run.
 	// ngDoCheck() {
 	// 	console.log('%c>>>> root -> cd ran', 'color: LightSalmon');
-	// 	flashEl(this.el.nativeElement, 'LightSalmon', this._ngZone);
+	// 	flashEl(this.el.nativeElement, 'LightSalmon', this.zone);
 	// }
 }

@@ -3,6 +3,7 @@ import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
+	Input,
 	NgZone,
 	OnChanges,
 	OnInit,
@@ -19,7 +20,7 @@ import { flashEl } from '../utils/utils';
 		<p>app-c</p>
 		<p>binding: {{ binding }}</p>
 		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
-		<app-d></app-d>
+		<app-d> [mutableObject]="mutableObject"</app-d>
 	`,
 	styles: [
 		`
@@ -34,16 +35,27 @@ import { flashEl } from '../utils/utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CComponent implements OnInit, OnChanges {
+	@Input() mutableObject: any = {
+		name: 'startWithThis',
+	};
+
 	binding = '';
 
 	private el = inject(ElementRef);
-	private _ngZone = inject(NgZone);
+	private zone = inject(NgZone);
 	private cdr = inject(ChangeDetectorRef);
+
+	constructor() {
+		// this.cdr.detach();
+	}
 
 	ngOnInit() {
 		// setTimeout(() => {
 		// 	this.binding = 'bound';
 		// }, 2000);
+		setTimeout(() => {
+			this.cdr.detectChanges();
+		}, 6000);
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -52,7 +64,7 @@ export class CComponent implements OnInit, OnChanges {
 
 	ngDoCheck() {
 		console.log('%c>>>> Component c ngDoCheck', 'color: Plum');
-		flashEl(this.el.nativeElement, 'Plum', this._ngZone);
+		flashEl(this.el.nativeElement, 'Plum', this.zone);
 	}
 
 	firePointlessEvent() {

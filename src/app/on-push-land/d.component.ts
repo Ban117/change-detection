@@ -1,8 +1,8 @@
 import {
-	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
+	Input,
 	NgZone,
 	OnChanges,
 	OnInit,
@@ -29,6 +29,7 @@ import { flashEl } from '../utils/utils';
 		<button [zoneless]="firePointlessEvent" zonelessEventName="dblclick">
 			Fire Pointless Event (uses zonless directive)
 		</button>
+		<p>{{ something.name }}</p>
 	`,
 	styles: [
 		`
@@ -39,16 +40,24 @@ import { flashEl } from '../utils/utils';
 			}
 		`,
 	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class DComponent implements OnInit, OnChanges {
+	@Input() mutableObject: any = {
+		name: 'startWithThis',
+	};
+
 	@ViewChild('btn') btnEl!: ElementRef<HTMLButtonElement>;
 
 	binding = '';
 
+	something = {
+		name: 'init',
+	};
+
 	private el = inject(ElementRef);
-	private _ngZone = inject(NgZone);
+	private zone = inject(NgZone);
 	private renderer = inject(Renderer2);
 	private cdr = inject(ChangeDetectorRef);
 
@@ -56,18 +65,21 @@ export class DComponent implements OnInit, OnChanges {
 		// setTimeout(() => {
 		// 	console.log('pointless');
 		// }, 5000);
+
+		this.zone.runOutsideAngular(() => (this.something.name = 'NEW'));
 	}
 
 	ngAfterViewInit() {
-		this._ngZone.runOutsideAngular(() => this.setupClickListener());
+		this.zone.runOutsideAngular(() => this.setupClickListener());
 	}
+
 	ngOnChanges(changes: SimpleChanges) {
 		console.log('%c>>>> Component D OnChanges', 'color: HotPink', changes);
 	}
 
 	ngDoCheck() {
 		console.log('%c>>>> Component D ngDoCheck', 'color: HotPink');
-		flashEl(this.el.nativeElement, 'HotPink', this._ngZone);
+		flashEl(this.el.nativeElement, 'HotPink', this.zone);
 	}
 
 	firePointlessEvent() {

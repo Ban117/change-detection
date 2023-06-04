@@ -25,7 +25,9 @@ should check parent OnPush components when child directive on a template emits e
 
 * We need to delete the `.angular` folder for changes to be applied
 
-* `detectChangesInternal` seems to run when CD runs
+* `detectChangesInternal` runs when CD runs
+
+* `refreshView` shows which views are being refreshed in a CD run
 
 * `markDirtyIfOnPush` is called when in a parent an input binding for a child is changed. This marks the child as dirty to continue the CD run downwards.
 ![markDirtyIfOnPush](img/Screenshot%202023-05-10%20at%2018.59.34.png)

@@ -11,7 +11,7 @@ import {
 		<a-life-cycle-hooks-cmp></a-life-cycle-hooks-cmp>`,
 	styles: [
 		`
-			.app-on-push-container {
+			.app-life-cycle-hooks-container {
 				display: block;
 				background: Tomato;
 				padding: 20px;

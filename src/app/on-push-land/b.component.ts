@@ -7,7 +7,9 @@ import {
 	NgZone,
 	OnChanges,
 	OnInit,
+	Renderer2,
 	SimpleChanges,
+	ViewChild,
 	ViewEncapsulation,
 	inject,
 } from '@angular/core';
@@ -20,8 +22,11 @@ import { flashEl } from '../utils/utils';
 		<p>app-b</p>
 		<p>binding: {{ binding }}</p>
 		<p>@Input mutable binding: {{ mutableObject.name }}</p>
-		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
-		<app-c></app-c>
+		<button #btn>Fire Pointless Event</button>
+		<!-- <button #btn (click)="firePointlessEvent()">
+			Fire Pointless Event
+		</button> -->
+		<app-c [mutableObject]="mutableObject"></app-c>
 	`,
 	styles: [
 		`
@@ -36,13 +41,18 @@ import { flashEl } from '../utils/utils';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BComponent implements OnInit, OnChanges {
-	@Input() mutableObject: any;
+	@ViewChild('btn') btnEl!: ElementRef<HTMLButtonElement>;
+
+	@Input() mutableObject: any = {
+		name: 'startWithThis',
+	};
 
 	binding = '';
 
 	private el = inject(ElementRef);
-	private _ngZone = inject(NgZone);
+	private zone = inject(NgZone);
 	private cdr = inject(ChangeDetectorRef);
+	private renderer = inject(Renderer2);
 
 	ngOnInit() {
 		// setTimeout(() => {
@@ -59,11 +69,23 @@ export class BComponent implements OnInit, OnChanges {
 	// (ie. it's not marked as dirty), ngDoCheck is not triggered for them.
 	ngDoCheck() {
 		console.log('%c>>>> Component B ngDoCheck', 'color: SkyBlue');
-		flashEl(this.el.nativeElement, 'SkyBlue', this._ngZone);
+		flashEl(this.el.nativeElement, 'SkyBlue', this.zone);
 		// this.cdr.markForCheck();
+	}
+
+	ngAfterViewInit() {
+		this.zone.runOutsideAngular(() => this.setupClickListener());
 	}
 
 	firePointlessEvent() {
 		console.log('%c>>>> buttonClicked', 'color: SkyBlue', BComponent.name);
+		this.mutableObject = { name: 'now this' };
+		this.cdr.detectChanges();
+	}
+
+	private setupClickListener() {
+		this.renderer.listen(this.btnEl.nativeElement, 'click', () => {
+			this.firePointlessEvent();
+		});
 	}
 }

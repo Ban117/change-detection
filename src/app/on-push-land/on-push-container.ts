@@ -29,7 +29,7 @@ import { flashEl } from '../utils/utils';
 })
 export class OnPushContainer {
 	private el = inject(ElementRef);
-	private _ngZone = inject(NgZone);
+	private zone = inject(NgZone);
 
 	// It's executed before Angular will run change detection for
 	// the component but during the check of the parent component.
@@ -42,6 +42,6 @@ export class OnPushContainer {
 	// If the component has children, and Angular doesn't check this component
 	// (ie. it's not marked as dirty), ngDoCheck is not triggered for them.
 	ngDoCheck() {
-		flashEl(this.el.nativeElement, 'SteelBlue', this._ngZone);
+		flashEl(this.el.nativeElement, 'SteelBlue', this.zone);
 	}
 }

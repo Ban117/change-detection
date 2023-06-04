@@ -40,7 +40,7 @@ export class AComponent implements OnInit, OnChanges {
 	};
 
 	private el = inject(ElementRef);
-	private _ngZone = inject(NgZone);
+	private zone = inject(NgZone);
 	private cdr = inject(ChangeDetectorRef);
 
 	binding = '';
@@ -65,7 +65,7 @@ export class AComponent implements OnInit, OnChanges {
 
 	ngDoCheck() {
 		console.log('%c>>>> Component A ngDoCheck', 'color: LavenderBlush');
-		flashEl(this.el.nativeElement, 'LavenderBlush', this._ngZone);
+		flashEl(this.el.nativeElement, 'LavenderBlush', this.zone);
 	}
 
 	firePointlessEvent() {
