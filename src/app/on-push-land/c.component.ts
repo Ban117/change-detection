@@ -23,6 +23,7 @@ const COMPONENT_COLOR = 'Plum';
 		<p>binding: {{ binding }}</p>
 		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
 		<app-d> [mutableObject]="mutableObject"</app-d>
+
 		{{ flash() }}
 	`,
 	styles: [
@@ -71,7 +72,6 @@ export class CComponent implements OnInit, OnChanges {
 			'%c>>>> Component c ngDoCheck',
 			`color: ${COMPONENT_COLOR}`
 		);
-		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	firePointlessEvent() {

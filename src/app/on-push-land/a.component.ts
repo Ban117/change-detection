@@ -66,10 +66,6 @@ export class AComponent implements OnInit, OnChanges {
 		);
 	}
 
-	ngDoCheck() {
-		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
-	}
-
 	firePointlessEvent() {
 		console.log(
 			'%c>>>> buttonClicked',

@@ -23,12 +23,13 @@ const COMPONENT_COLOR = 'SkyBlue';
 	template: `
 		<p>app-b</p>
 		<p>binding: {{ binding }}</p>
-		<p>@Input mutable binding: {{ mutableObject.name }}</p>
+		<p>&#64;Input mutable binding: {{ mutableObject.name }}</p>
 		<button #btn>Fire Pointless Event</button>
 		<!-- <button #btn (click)="firePointlessEvent()">
 			Fire Pointless Event
 		</button> -->
 		<app-c [mutableObject]="mutableObject"></app-c>
+
 		{{ flash() }}
 	`,
 	styles: [
@@ -79,7 +80,6 @@ export class BComponent implements OnInit, OnChanges {
 			'%c>>>> Component B ngDoCheck',
 			`color: ${COMPONENT_COLOR}`
 		);
-		// this.cdr.markForCheck();
 	}
 
 	ngAfterViewInit() {

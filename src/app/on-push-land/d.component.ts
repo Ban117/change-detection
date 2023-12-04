@@ -32,6 +32,8 @@ const COMPONENT_COLOR = 'HotPink';
 			Fire Pointless Event (uses zonless directive)
 		</button>
 		<p>{{ something.name }}</p>
+
+		{{ flash() }}
 	`,
 	styles: [
 		`
@@ -88,7 +90,6 @@ export class DComponent implements OnInit, OnChanges {
 			'%c>>>> Component D ngDoCheck',
 			`color: ${COMPONENT_COLOR}`
 		);
-		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	firePointlessEvent() {
