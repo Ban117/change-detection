@@ -15,6 +15,8 @@ import {
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
+const COMPONENT_COLOR = 'SkyBlue';
+
 @Component({
 	selector: 'app-b',
 	host: { class: 'app-b' },
@@ -27,6 +29,7 @@ import { flashEl } from '../utils/utils';
 			Fire Pointless Event
 		</button> -->
 		<app-c [mutableObject]="mutableObject"></app-c>
+		{{ flash() }}
 	`,
 	styles: [
 		`
@@ -61,15 +64,21 @@ export class BComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log('%c>>>> Component B OnChanges', 'color: SkyBlue', changes);
+		console.log(
+			'%c>>>> Component B OnChanges',
+			`color: ${COMPONENT_COLOR}`,
+			changes
+		);
 	}
 
 	// Keep in mind that ngDoCheck is triggered only for top-most child component.
 	// If the component has children, and Angular doesn't check this component
 	// (ie. it's not marked as dirty), ngDoCheck is not triggered for them.
 	ngDoCheck() {
-		console.log('%c>>>> Component B ngDoCheck', 'color: SkyBlue');
-		flashEl(this.el.nativeElement, 'SkyBlue', this.zone);
+		console.log(
+			'%c>>>> Component B ngDoCheck',
+			`color: ${COMPONENT_COLOR}`
+		);
 		// this.cdr.markForCheck();
 	}
 
@@ -78,9 +87,18 @@ export class BComponent implements OnInit, OnChanges {
 	}
 
 	firePointlessEvent() {
-		console.log('%c>>>> buttonClicked', 'color: SkyBlue', BComponent.name);
+		console.log(
+			'%c>>>> buttonClicked',
+			`color: ${COMPONENT_COLOR}`,
+			BComponent.name
+		);
 		this.mutableObject = { name: 'now this' };
+		// https://courses.indepth.dev/angular/running-change-detection/detached-views
 		this.cdr.detectChanges();
+	}
+
+	flash() {
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	private setupClickListener() {

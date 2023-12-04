@@ -13,6 +13,8 @@ import {
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
+const COMPONENT_COLOR = 'Plum';
+
 @Component({
 	selector: 'app-c',
 	host: { class: 'app-c' },
@@ -21,6 +23,7 @@ import { flashEl } from '../utils/utils';
 		<p>binding: {{ binding }}</p>
 		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
 		<app-d> [mutableObject]="mutableObject"</app-d>
+		{{ flash() }}
 	`,
 	styles: [
 		`
@@ -53,21 +56,33 @@ export class CComponent implements OnInit, OnChanges {
 		// setTimeout(() => {
 		// 	this.binding = 'bound';
 		// }, 2000);
-		setTimeout(() => {
-			this.cdr.detectChanges();
-		}, 6000);
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log('%c>>>> Component C OnChanges', 'color: Plum', changes);
+		console.log(
+			'%c>>>> Component C OnChanges',
+			`color: ${COMPONENT_COLOR}`,
+			changes
+		);
 	}
 
 	ngDoCheck() {
-		console.log('%c>>>> Component c ngDoCheck', 'color: Plum');
-		flashEl(this.el.nativeElement, 'Plum', this.zone);
+		console.log(
+			'%c>>>> Component c ngDoCheck',
+			`color: ${COMPONENT_COLOR}`
+		);
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	firePointlessEvent() {
-		console.log('%c>>>> buttonClicked', 'color: Plum', CComponent.name);
+		console.log(
+			'%c>>>> buttonClicked',
+			`color: ${COMPONENT_COLOR}`,
+			CComponent.name
+		);
+	}
+
+	flash() {
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 }

@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
+const COMPONENT_COLOR = 'LavenderBlush';
+
 @Component({
 	selector: 'app-a',
 	host: { class: 'app-a' },
@@ -21,6 +23,7 @@ import { flashEl } from '../utils/utils';
 		<button (click)="firePointlessEvent()">Fire Pointless Event</button>
 		<button (click)="otherButtonClicked()">Button_2</button>
 		<app-b [mutableObject]="mutableObject"></app-b>
+		{{ flash() }}
 	`,
 	styles: [
 		`
@@ -58,25 +61,28 @@ export class AComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges) {
 		console.log(
 			'%c>>>> Component A OnChanges',
-			'color: LavenderBlush',
+			`color: ${COMPONENT_COLOR}`,
 			changes
 		);
 	}
 
 	ngDoCheck() {
-		console.log('%c>>>> Component A ngDoCheck', 'color: LavenderBlush');
-		flashEl(this.el.nativeElement, 'LavenderBlush', this.zone);
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	firePointlessEvent() {
 		console.log(
 			'%c>>>> buttonClicked',
-			'color: LavenderBlush',
+			`color: ${COMPONENT_COLOR}`,
 			AComponent.name
 		);
 	}
 
 	otherButtonClicked() {
 		this.mutableObject.name = 'Now this';
+	}
+
+	flash() {
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 }

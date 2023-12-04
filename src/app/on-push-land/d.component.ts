@@ -14,6 +14,8 @@ import {
 } from '@angular/core';
 import { flashEl } from '../utils/utils';
 
+const COMPONENT_COLOR = 'HotPink';
+
 @Component({
 	selector: 'app-d',
 	host: { class: 'app-d' },
@@ -74,16 +76,31 @@ export class DComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log('%c>>>> Component D OnChanges', 'color: HotPink', changes);
+		console.log(
+			'%c>>>> Component D OnChanges',
+			`color: ${COMPONENT_COLOR}`,
+			changes
+		);
 	}
 
 	ngDoCheck() {
-		console.log('%c>>>> Component D ngDoCheck', 'color: HotPink');
-		flashEl(this.el.nativeElement, 'HotPink', this.zone);
+		console.log(
+			'%c>>>> Component D ngDoCheck',
+			`color: ${COMPONENT_COLOR}`
+		);
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	firePointlessEvent() {
-		console.log('%c>>>> buttonClicked', 'color: HotPink', DComponent.name);
+		console.log(
+			'%c>>>> buttonClicked',
+			`color: ${COMPONENT_COLOR}`,
+			DComponent.name
+		);
+	}
+
+	flash() {
+		flashEl(this.el.nativeElement, COMPONENT_COLOR, this.zone);
 	}
 
 	private setupClickListener() {
